@@ -31,20 +31,21 @@ const findCircleNum = function (isConnected) {
         // add one to total islands
         islands++;
         // create a queue starting with current land node
-        const queue = [node];
+        const queue = [[i, j]];
         // while there is land to the right or land below or there is a queue length
         let row = i, col = j;
-        let lr = isConnected[row][col+1], ld = isConnected[row+1][col];
-        while (lr || ld || queue.length) {
+        while (queue.length) {
           // change each queue location to a zero
           let [i, j] = queue.pop();
           isConnected[i][j] = 0;
           // if right node is land
-          if (lr) { queue.push([row, col]) row++ }
-            // add right node to queue
+          // if (row < isConnected.length && col < isConnected.length) {
+          if (isConnected[row][col + 1]) { queue.push([row, col]); }
+          // add right node to queue
           // if below node is land
-          if (ld) { queue.push([row, col]) col++ }
-            // add below node to queue
+          if (isConnected[row + 1][col]) { row += 1; queue.push([row, col]); }
+          // add below node to queue
+          // }
         }
       }
     }
@@ -52,3 +53,5 @@ const findCircleNum = function (isConnected) {
   //return total islands
   return islands;
 };
+
+console.log(findCircleNum([[1, 1, 0], [1, 1, 0], [0, 0, 1]]));
