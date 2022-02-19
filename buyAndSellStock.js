@@ -20,8 +20,8 @@ var maxProfit = function (prices) {
   prices.forEach((price, index) => {
     // iterate through prices again for each price
 
-    // YOU DONT HAVE TO CHECK EACH VALUE AGAINST EVERY OTHER VALUE (N^2). IT IS ENOUGH TO TRACK THE LOWEST VALUE AND COMPARE
-    // THAT TO EVERY SUBSEQUENT VALUE FOR THE LARGEST PROFIT
+    // YOU DONT HAVE TO CHECK EACH VALUE AGAINST EVERY OTHER VALUE (N^2). IT IS ENOUGH
+    //TO TRACK THE LOWEST VALUE AND COMPARE THAT TO EVERY SUBSEQUENT VALUE FOR THE LARGEST PROFIT
     min = Math.min(min, price)
     //min = 7
     //min = 1
