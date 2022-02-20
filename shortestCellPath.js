@@ -35,31 +35,41 @@ output: -1
 1011
 */
 
+
 function shortestCellPath(grid, sr, sc, tr, tc) {
   // your code goes here
-  // create a queue
   const q = [[sr, sc, 0]];
-  // create a seen object or map, assign seenNodes as distance from start
   const seenNodes = {};
-  // while there is a queue length
-  while (q.length) {
-    // take first node in queue
-    let [sr, sc, depth] = q.shift(0)
-    seenNodes[`${sr, sc}`] = true;
-    // if node has top node of 1, add to queue (and node coords have not been seen)
-    if (!seenNodes[`${sr - 1, sc}`] && [grid[sr - 1] && grid[sr - 1][sc] === 1) {
-      q.push([sr - 1, sc, depth + 1])
+  const direct = [[-1, 0], [0, 1], [1, 0], [0, -1]];
+  const yl = grid.length;
+  const xl = grid[0].length;
+
+  const path = (x, y) => {
+    if ((x < 0 || y < 0) || !grid[x][y] || seenNodes[`${x}` + `${y}`]) {
+      return false;
     }
-    if (!seenNodes[`${sr - 1, sc}`] && [grid[sr - 1] && grid[sr - 1][sc] === 1) {
-        q.push([sr - 1, sc, depth + 1])
-      }
-    if (!seenNodes[`${sr - 1, sc}`] && [grid[sr - 1] && grid[sr - 1][sc] === 1) {
-          q.push([sr - 1, sc, depth + 1])
-        }
-    if (!seenNodes[`${sr - 1, sc}`] && [grid[sr - 1] && grid[sr - 1][sc] === 1) {
-            q.push([sr - 1, sc, depth + 1])
-          }
+    return true;
   }
+
+  while (q.length) {
+    let [sr, sc, depth] = q.shift(0)
+    seenNodes[`${sr}` + `${sc}`] = true;
+    if (sr === tr && sc === tc) { return depth; }
+    for (let tup of direct) {
+      let newSR = tup[0] + sr;
+      let newSC = tup[1] + sc;
+      if (newSR < yl && newSC < xl) {
+        if (path(newSR, newSC)) {
+          q.push([newSR, newSC, depth + 1])
+        }
+      }
+    }
+  }
+  return -1;
+};
+
+const grid1 = [[0, 0, 0, 1], [0, 0, 0, 1], [1, 1, 1, 1]]
+console.log(shortestCellPath(grid1, 0, 3, 2, 0))
   // if node has right node of 1, add to queue
   // if node has bottom node of 1, add to queue
   // if node has left node of 1, add to queue
@@ -72,4 +82,3 @@ function shortestCellPath(grid, sr, sc, tr, tc) {
 
   // check left, right, up, and down for one coord
   // do the check again when we arrive at new coord
-}
