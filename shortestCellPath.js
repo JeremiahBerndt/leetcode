@@ -45,7 +45,7 @@ function shortestCellPath(grid, sr, sc, tr, tc) {
   const xl = grid[0].length;
 
   const path = (x, y) => {
-    if ((x < 0 || y < 0) || !grid[x][y] || seenNodes[`${x}` + `${y}`]) {
+    if (!grid[x][y] || seenNodes[`${x}` + `${y}`]) {
       return false;
     }
     return true;
@@ -58,7 +58,7 @@ function shortestCellPath(grid, sr, sc, tr, tc) {
     for (let tup of direct) {
       let newSR = tup[0] + sr;
       let newSC = tup[1] + sc;
-      if (newSR < yl && newSC < xl) {
+      if (newSR < yl && newSC < xl && !(newSR < 0 || newSC < 0)) {
         if (path(newSR, newSC)) {
           q.push([newSR, newSC, depth + 1])
         }
