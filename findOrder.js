@@ -68,8 +68,9 @@ const findOrder = (numCourses, prerequisites) => {
   return result;
 }
 
-const prereqs = [[1, 0], [2, 0], [3, 1], [3, 2]];
-console.log(findOrder(4, prereqs))
+// const prereqs = [[1, 0], [2, 0], [3, 1], [3, 2]];
+const prereqs1 = [[0, 1]];
+console.log(findOrder(4, prereqs1));
 /*
 prereqs = [[1, 2], [2, 3], [3, 1]] => false
 
